@@ -18,7 +18,9 @@
 
         html, body {
             height: 100%;
+            width: 100%;
             overflow: hidden;
+            position: fixed;
         }
 
         body {
@@ -44,8 +46,8 @@
             
             const { innerWidth: width, innerHeight: height } = window;
             const hSpacing = 648, vSpacing = 180;
-            const cols = Math.ceil(width / hSpacing) + 2;
-            const rows = Math.ceil(height / vSpacing) + 2;
+            const cols = Math.ceil(width / hSpacing) + 3;
+            const rows = Math.ceil(height / vSpacing) + 3;
             const startX = -hSpacing + 60, startY = 30;
             
             for (let row = 0; row < rows; row++) {
