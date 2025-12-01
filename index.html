@@ -18,38 +18,56 @@
 
         html, body {
             height: 100%;
-            width: 100%;
             overflow: hidden;
         }
 
         body {
-            background-color: #ffffff;
-            background-image: 
-                repeating-linear-gradient(
-                    0deg,
-                    #CC0000 0,
-                    #CC0000 0.5vh,
-                    transparent 0.5vh,
-                    transparent 1.5vh
-                );
-            min-height: 100vh;
+            background: white repeating-linear-gradient(0deg, #CC0000 0 3px, transparent 3px 9px);
         }
 
         .logo {
             position: absolute;
-            top: 3vh;
-            left: 4vw;
             font-family: 'Rajdhani', sans-serif;
             font-weight: 900;
-            font-size: clamp(40px, 12vw, 120px);
-            color: #ffffff;
-            text-shadow: 0.10em 0 0 #CC0000,
-                         0.12em 0 0 #CC0000;
+            font-size: 120px;
+            color: white;
+            text-shadow: 0.1em 0 0 #CC0000, 0.12em 0 0 #CC0000;
+            pointer-events: none;
+            white-space: nowrap;
         }
-
     </style>
 </head>
 <body>
-    <h1 class="logo">stacra</h1>
+    <script>
+        const generateStacras = () => {
+            document.body.innerHTML = '';
+            
+            const { innerWidth: width, innerHeight: height } = window;
+            const hSpacing = 648, vSpacing = 180;
+            const cols = Math.ceil(width / hSpacing) + 2;
+            const rows = Math.ceil(height / vSpacing) + 2;
+            const startX = -hSpacing + 60, startY = 30;
+            
+            for (let row = 0; row < rows; row++) {
+                const offset = row % 2 ? hSpacing / 2 : 0;
+                for (let col = 0; col < cols; col++) {
+                    const logo = document.createElement('h1');
+                    logo.className = 'logo';
+                    logo.textContent = 'stacra';
+                    logo.style.left = `${startX + col * hSpacing + offset}px`;
+                    logo.style.top = `${startY + row * vSpacing}px`;
+                    document.body.appendChild(logo);
+                }
+            }
+        };
+        
+        generateStacras();
+        
+        let timeout;
+        window.addEventListener('resize', () => {
+            clearTimeout(timeout);
+            timeout = setTimeout(generateStacras, 100);
+        });
+    </script>
 </body>
 </html>
