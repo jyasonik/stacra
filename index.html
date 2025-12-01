@@ -51,7 +51,8 @@
             const startX = -hSpacing + 60, startY = 30;
             
             for (let row = 0; row < rows; row++) {
-                const offset = row % 2 ? hSpacing / 2 : 0;
+                const offsets = [0, hSpacing * 0.4, hSpacing * 0.7, hSpacing * 0.2, hSpacing * 0.55];
+                const offset = offsets[row % offsets.length];
                 for (let col = 0; col < cols; col++) {
                     const logo = document.createElement('h1');
                     logo.className = 'logo';
