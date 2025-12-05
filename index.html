@@ -3,74 +3,53 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="stacra">
-    <title>stacra</title>
+    <meta name="description" content="Stacra, LLC.">
+    <title>Stacra, LLC.</title>
     <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><rect width=%22100%22 height=%22100%22 fill=%22%23CC0000%22/></svg>">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@700&display=swap" rel="stylesheet">
     <style>
+        :root {
+            --brand: #CC0000;
+        }
+
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
 
-        html, body {
-            height: 100%;
-            width: 100%;
-            overflow: hidden;
-            position: fixed;
-        }
-
         body {
-            background: white repeating-linear-gradient(0deg, #CC0000 0 3px, transparent 3px 9px);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding-top: 25vh;
         }
 
-        .logo {
-            position: absolute;
-            font-family: 'Rajdhani', sans-serif;
-            font-weight: 900;
-            font-size: 120px;
-            color: white;
-            text-shadow: 0.1em 0 0 #CC0000, 0.12em 0 0 #CC0000;
-            pointer-events: none;
-            white-space: nowrap;
+        h1 {
+            font-family: Rajdhani, Arial, sans-serif;
+            font-weight: 700;
+            font-size: clamp(24px, 4vw, 48px);
+            color: var(--brand);
+        }
+
+        .scanlines {
+            width: clamp(135px, 22.5vw, 270px);
+            height: 27px;
+            margin-top: 8px;
+            background: repeating-linear-gradient(
+                0deg,
+                var(--brand) 0,
+                var(--brand) 3px,
+                transparent 3px,
+                transparent 6px
+            );
         }
     </style>
 </head>
 <body>
-    <script>
-        const generateStacras = () => {
-            document.body.innerHTML = '';
-            
-            const { innerWidth: width, innerHeight: height } = window;
-            const hSpacing = 648, vSpacing = 180;
-            const cols = Math.ceil(width / hSpacing) + 3;
-            const rows = Math.ceil(height / vSpacing) + 3;
-            const startX = -hSpacing + 60, startY = 30;
-            
-            for (let row = 0; row < rows; row++) {
-                const offsets = [0, hSpacing * 0.4, hSpacing * 0.7, hSpacing * 0.2, hSpacing * 0.55];
-                const offset = offsets[row % offsets.length];
-                for (let col = 0; col < cols; col++) {
-                    const logo = document.createElement('h1');
-                    logo.className = 'logo';
-                    logo.textContent = 'stacra';
-                    logo.style.left = `${startX + col * hSpacing + offset}px`;
-                    logo.style.top = `${startY + row * vSpacing}px`;
-                    document.body.appendChild(logo);
-                }
-            }
-        };
-        
-        generateStacras();
-        
-        let timeout;
-        window.addEventListener('resize', () => {
-            clearTimeout(timeout);
-            timeout = setTimeout(generateStacras, 100);
-        });
-    </script>
+    <h1>Stacra</h1>
+    <div class="scanlines"></div>
 </body>
 </html>
